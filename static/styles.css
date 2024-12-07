@@ -1,0 +1,542 @@
+/* Base Variables and Reset */
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --background-color: #f5f6fa;
+    --text-color: #2c3e50;
+    --border-color: #dcdde1;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+/* Layout */
+.container {
+    display: grid;
+    grid-template-columns: 250px 1fr 300px;
+    height: 100vh;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.sidebar-menu {
+    list-style: none;
+}
+
+.sidebar-menu li {
+    padding: 12px 15px;
+    margin: 5px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.sidebar-menu li:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Main Content Styles */
+.main-content {
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.slide-editor {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Preview Panel Styles */
+.preview-panel {
+    background-color: white;
+    border-left: 1px solid var(--border-color);
+    padding: 20px;
+}
+
+.preview-window {
+    background-color: black;
+    color: white;
+    height: 200px;
+    margin: 10px 0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Button and Control Styles */
+.control-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.primary-button {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.primary-button:hover {
+    background-color: #2980b9;
+}
+
+/* Form Elements */
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-field {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+/* Tabs Styling */
+.tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+}
+
+.tab.active {
+    border-bottom-color: var(--secondary-color);
+    color: var(--secondary-color);
+}
+
+/* Song List Styles */
+.song-list {
+    max-height: 500px;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    margin-top: 20px;
+}
+
+.song-item {
+    padding: 15px;
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.2s;
+}
+
+.song-item:last-child {
+    border-bottom: none;
+}
+
+.song-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.song-title {
+    font-size: 1.1em;
+    color: var(--text-color);
+}
+
+.song-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: modalOpen 0.3s ease-out;
+    margin: auto;
+}
+
+@keyframes modalOpen {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.modal.show {
+    display: flex !important;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.modal-header h2 {
+    margin: 0;
+    color: var(--text-color);
+    font-size: 1.5em;
+}
+
+.modal-body {
+    margin-bottom: 20px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border-color);
+}
+
+.close-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--text-color);
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.close-button:hover {
+    opacity: 1;
+}
+
+/* Presentation Styles */
+.presentation-controls {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: var(--background-color);
+    border-radius: 5px;
+}
+
+.presentation-list {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    min-height: 200px;
+}
+
+.presentation-item {
+    padding: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.presentation-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.presentation-title {
+    font-size: 1.1em;
+    color: var(--text-color);
+}
+
+.presentation-actions {
+    display: flex;
+    gap: 10px;
+}
+
+#presentation-content {
+    margin-bottom: 20px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* State Styles */
+.loading {
+    text-align: center;
+    padding: 20px;
+    color: var(--text-color);
+}
+
+.error {
+    color: #dc3545;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Enhanced Preview Window */
+.preview-window pre {
+    white-space: pre-wrap;
+    font-family: inherit;
+    text-align: left;
+    line-height: 1.5;
+}
+
+.preview-window h4 {
+    margin-bottom: 15px;
+    color: var(--secondary-color);
+    font-size: 1.2em;
+}
+
+/* Search Input */
+#song-search {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1em;
+    transition: border-color 0.3s;
+    margin-bottom: 20px;
+}
+
+#song-search:focus {
+    border-color: var(--secondary-color);
+    outline: none;
+}
+
+/* Hover Effects */
+.song-item:hover {
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+.presentation-item:hover {
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+/* Tab Content */
+.tab-content {
+    /*margin-top: 20px;*/
+    display: none;
+}
+
+.bible-book-results {
+    position: absolute;
+    z-index: 1000;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    max-height: 200px;
+    overflow-y: auto;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: none;
+}
+
+.search-result-item {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.search-result-item:hover {
+    background-color: #f5f5f5;
+}
+
+.verse-search-fields {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.verse-preview {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.verse-content {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+.verse-content h4 {
+    margin: 0 0 10px 0;
+    color: #2c3e50;
+}
+
+.error {
+    color: #dc3545;
+    padding: 10px;
+    background: #fff3f3;
+    border-radius: 4px;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .container {
+        grid-template-columns: 200px 1fr 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+    .sidebar, .preview-panel {
+        display: none;
+    }
+    .modal-content {
+        width: 95%;
+        margin: 10px;
+    }
+}
+
+/* Modal Styles */
+.modal-content {
+    max-height: 90vh;
+    overflow-y: auto;
+    width: 90%;
+    max-width: 800px;
+}
+
+.slides-container {
+    margin-top: 20px;
+}
+
+.slide-section {
+    margin-bottom: 25px;
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: #f8f9fa;
+}
+
+.slide-header {
+    margin-bottom: 10px;
+}
+
+.slide-header h4 {
+    margin: 0;
+    color: var(--primary-color);
+}
+
+.song-search {
+    position: relative;
+}
+
+.search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: 200px;
+    overflow-y: auto;
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    z-index: 1000;
+    display: none;
+}
+
+.search-results.active {
+    display: block;
+}
+
+.search-result-item {
+    padding: 8px 12px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.search-result-item:hover {
+    background-color: #f0f0f0;
+}
+
+.selected-song {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    display: none;
+}
+
+.selected-song.active {
+    display: block;
+}
+
+.verse-search-fields {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.verse-preview {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    min-height: 60px;
+}
+
+.bible-verse-search button {
+    margin-top: 10px;
+}
+
+.prayer-slide, .offering-slide {
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    text-align: center;
+    color: #666;
+}

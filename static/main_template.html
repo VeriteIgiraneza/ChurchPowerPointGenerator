@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Church Presentation S</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <ul class="sidebar-menu">
+                <li data-tab="presentation" class="active">Presentation</li>
+                <li data-tab="songs">Songs</li>
+                <li data-tab="bible-verses">Bible Verses</li>
+                <li data-tab="announcements">Announcements</li>
+                <li data-tab="settings">Settings</li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Tabs -->
+            <div class="tabs">
+                <div class="tab active" data-tab="presentation">Presentation</div>
+                <div class="tab" data-tab="songs">Songs</div>
+                <div class="tab" data-tab="bible-verses">Bible Verses</div>
+                <div class="tab" data-tab="announcements">Announcements</div>
+                <div class="tab" data-tab="settings">Settings</div>
+            </div>
+
+            <!-- Presentation Tab Content -->
+            <div class="tab-content" id="presentation-content" style="display: none;">
+                <div class="presentation-controls">
+                    <button class="button primary-button" id="newPresentationBtn">New Presentation</button>
+                </div>
+                <div class="presentation-list" id="presentationList">
+                    <!-- Presentations will be listed here -->
+                </div>
+            </div>
+
+            <!-- Songs Tab Content -->
+            <div class="tab-content" id="songs-content">
+                <div class="slide-editor">
+                    <div class="input-group">
+                        <label for="song-search">Search Songs</label>
+                        <input type="text" id="song-search" class="input-field" placeholder="Search by title or number...">
+                    </div>
+                    <ul class="song-list" id="songList">
+                        <li class="song-item loading">Loading songs...</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bible Verses Tab Content -->
+            <div class="tab-content" id="bible-verses-content" style="display: none;">
+                <div class="slide-editor">
+                    <div class="input-group">
+                        <label for="verse-search">Search Bible Verses</label>
+                        <input type="text" id="verse-search" class="input-field" placeholder="Search by book, chapter, or verse...">
+                    </div>
+                    <div class="verse-list" id="verseList">
+                        <!-- Bible verses will be listed here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Announcements Tab Content -->
+            <div class="tab-content" id="announcements-content" style="display: none;">
+                <div class="slide-editor">
+                    <div class="announcement-controls">
+                        <button class="button primary-button" id="newAnnouncementBtn">New Announcement</button>
+                    </div>
+                    <div class="announcement-list" id="announcementList">
+                        <!-- Announcements will be listed here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Tab Content -->
+            <div class="tab-content" id="settings-content" style="display: none;">
+                <div class="settings-section">
+                    <h3>Display Settings</h3>
+                    <div class="setting-group">
+                        <label for="font-size">Font Size</label>
+                        <select id="font-size" class="input-field">
+                            <option value="small">Small</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="large">Large</option>
+                        </select>
+                    </div>
+                    <div class="setting-group">
+                        <label for="theme">Theme</label>
+                        <select id="theme" class="input-field">
+                            <option value="light" selected>Light</option>
+                            <option value="dark">Dark</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Preview Panel -->
+        <div class="preview-panel">
+            <h3>Preview</h3>
+            <div class="preview-window" id="previewWindow">
+                Preview content will appear here
+            </div>
+            <div class="control-buttons">
+                <button class="button" id="prevButton">Previous</button>
+                <button class="button" id="nextButton">Next</button>
+                <button class="button primary-button" id="goLiveButton">Go Live</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal" id="presentationModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>New Presentation</h2>
+            <button class="close-button" onclick="closeModal('presentationModal')">&times;</button>
+        </div>
+        <div class="modal-body">
+            <!-- Basic Info -->
+            <div class="input-group">
+                <label for="presentation-name">Presentation Name</label>
+                <input type="text" id="presentation-name" class="input-field" placeholder="Enter presentation name">
+            </div>
+            <div class="input-group">
+                <label for="presentation-date">Date</label>
+                <input type="date" id="presentation-date" class="input-field">
+            </div>
+
+            <!-- Service Order Slides -->
+            <div class="slides-container">
+                <h3>Service Slides</h3>
+
+                <!-- Opening Song 1 -->
+                <div class="slide-section">
+                    <div class="slide-header">
+                        <h4>Opening Song 1</h4>
+                    </div>
+                    <div class="song-search">
+                        <input type="text" class="input-field" id="opening-song-1-search"
+                               placeholder="Search songs..." onkeyup="searchSongs(event, 'opening-song-1-results')">
+                        <div class="search-results" id="opening-song-1-results"></div>
+                    </div>
+                    <div class="selected-song" id="opening-song-1-selected"></div>
+                </div>
+
+                <!-- Opening Song 2 -->
+                <div class="slide-section">
+                    <div class="slide-header">
+                        <h4>Opening Song 2</h4>
+                    </div>
+                    <div class="song-search">
+                        <input type="text" class="input-field" id="opening-song-2-search"
+                               placeholder="Search songs..." onkeyup="searchSongs(event, 'opening-song-2-results')">
+                        <div class="search-results" id="opening-song-2-results"></div>
+                    </div>
+                    <div class="selected-song" id="opening-song-2-selected"></div>
+                </div>
+
+                <!-- Prayer Slide -->
+                <div class="slide-section">
+                    <div class="slide-header">
+                        <h4>Prayer</h4>
+                    </div>
+                    <div class="prayer-slide">
+                        <p>This will create a slide displaying "Prayer"</p>
+                    </div>
+                </div>
+
+                <!-- Worship Song -->
+                <div class="slide-section">
+                    <div class="slide-header">
+                        <h4>Worship Song</h4>
+                    </div>
+                    <div class="song-search">
+                        <input type="text" class="input-field" id="worship-song-search"
+                               placeholder="Search songs..." onkeyup="searchSongs(event, 'worship-song-results')">
+                        <div class="search-results" id="worship-song-results"></div>
+                    </div>
+                    <div class="selected-song" id="worship-song-selected"></div>
+                </div>
+
+                <!-- Bible Verse -->
+                <!-- Replace both verse sections with this code -->
+
+<!-- Bible Verse -->
+<div class="slide-section">
+    <div class="slide-header">
+        <h4>Bible Verse</h4>
+    </div>
+    <div class="bible-verse-search">
+        <div class="verse-search-fields">
+            <input type="text" class="input-field" id="bible-verse-book" placeholder="Book name">
+            <input type="number" class="input-field" id="bible-verse-chapter" placeholder="Chapter">
+            <input type="number" class="input-field" id="bible-verse-verse-start" placeholder="From verse">
+            <input type="number" class="input-field" id="bible-verse-verse-end" placeholder="To verse">
+            <button class="button" id="bible-verse-search-button">Search</button>
+        </div>
+        <div class="verse-preview" id="bible-verse-preview"></div>
+    </div>
+</div>
+
+<!-- Key Verse -->
+<div class="slide-section">
+    <div class="slide-header">
+        <h4>Key Verse</h4>
+    </div>
+    <div class="bible-verse-search">
+        <div class="verse-search-fields">
+            <input type="text" class="input-field" id="key-verse-book" placeholder="Book name">
+            <input type="number" class="input-field" id="key-verse-chapter" placeholder="Chapter">
+            <input type="number" class="input-field" id="key-verse-verse-start" placeholder="From verse">
+            <input type="number" class="input-field" id="key-verse-verse-end" placeholder="To verse">
+            <button class="button" id="key-verse-search-button">Search</button>
+        </div>
+        <div class="verse-preview" id="key-verse-preview"></div>
+    </div>
+</div>
+                <!-- Offering Slide -->
+                <div class="slide-section">
+                    <div class="slide-header">
+                        <h4>Offering</h4>
+                    </div>
+                    <div class="offering-slide">
+                        <p>This will create a slide displaying "Offering"</p>
+                    </div>
+                </div>
+
+                <!-- Closing Song -->
+                <div class="slide-section">
+                    <div class="slide-header">
+                        <h4>Closing Song</h4>
+                    </div>
+                    <div class="song-search">
+                        <input type="text" class="input-field" id="closing-song-search"
+                               placeholder="Search songs..." onkeyup="searchSongs(event, 'closing-song-results')">
+                        <div class="search-results" id="closing-song-results"></div>
+                    </div>
+                    <div class="selected-song" id="closing-song-selected"></div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="button" onclick="closeModal('presentationModal')">Cancel</button>
+            <button class="button primary-button" onclick="savePresentation()">Create</button>
+        </div>
+    </div>
+</div>
+
+    <!-- Announcement Modal -->
+    <div class="modal" id="announcementModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>New Announcement</h2>
+                <button class="close-button" onclick="closeModal('announcementModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <label for="announcement-title">Title</label>
+                    <input type="text" id="announcement-title" class="input-field" placeholder="Enter announcement title">
+                </div>
+                <div class="input-group">
+                    <label for="announcement-content">Content</label>
+                    <textarea id="announcement-content" class="input-field" rows="4" placeholder="Enter announcement content"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="button" onclick="closeModal('announcementModal')">Cancel</button>
+                <button class="button primary-button" onclick="saveAnnouncement()">Create</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>

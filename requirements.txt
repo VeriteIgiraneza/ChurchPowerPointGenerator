@@ -1,0 +1,26 @@
+PyQt6==6.6.1
+PyQt6-Qt6==6.6.1
+PyQt6-sip==13.6.0
+mysql-connector-python==8.2.0
+
+function addAnnouncementToList(announcement) {
+    const announcementList = document.getElementById('announcementList');
+    const announcementElement = document.createElement('div');
+    announcementElement.className = 'announcement-item';
+    announcementElement.innerHTML = `
+        <div class="announcement-info">
+            <span class="announcement-title">${escapeHtml(announcement.title)}</span>
+            <div class="announcement-actions">
+                <button class="button" onclick="editAnnouncement(${announcement.id})">Edit</button>
+                <button class="button" onclick="deleteAnnouncement(${announcement.id})">Delete</button>
+            </div>
+        </div>
+        <div class="announcement-content">${escapeHtml(announcement.content)}</div>
+    `;
+    announcementList.appendChild(announcementElement);
+}
+
+function loadAnnouncements() {
+    // Implement loading announcements from storage/database
+    console.log('Loading announcements');
+}
